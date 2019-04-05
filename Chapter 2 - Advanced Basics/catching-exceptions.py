@@ -5,7 +5,7 @@ def count_lines(filename):
     """
     try:
         return len(open(filename, 'r').readlines())
-    except:
+    except IOError:
         print('exception error reading the file or calculating lines!')
         # Something went wrong reading the file
         # or calculating the number of lines.
