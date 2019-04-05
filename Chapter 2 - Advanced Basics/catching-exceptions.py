@@ -8,11 +8,12 @@ def count_lines(filename):
     """
     try:
         return len(open(filename, 'r').readlines())
-    except (EnvironmentError, TypeError) as e:
-        print('exception error reading the file or calculating lines!')
-        # Something went wrong reading the file
+    except TypeError as e:
+        # The filename wasn't valid for use with the filesystem.
         logging.error(e)
-        # or calculating the number of lines.
+    except EnvironmentError as e:
+        # Something went wrong reading the file
+        logging.error(e.args[1])
         return 0
 
 
