@@ -7,7 +7,7 @@ def count_lines(filename):
     opened, it should be treated the same as if it was empty.
     """
     try:
-        return len(open(filename, 'r').readlines())
+        file = open(filename, 'r')
     except TypeError as e:
         # The filename wasn't valid for use with the filesystem.
         logging.error(e)
@@ -15,6 +15,8 @@ def count_lines(filename):
         # Something went wrong reading the file
         logging.error(e.args[1])
         return 0
+    else:
+        return len(file.readlines())
 
 
 myfile = input('Enter a file to open: ')
