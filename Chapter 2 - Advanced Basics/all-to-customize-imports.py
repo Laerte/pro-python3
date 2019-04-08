@@ -1,5 +1,12 @@
 from example import *
 
+'''
+EXPLICIT IS BETTER THAN IMPLICIT
+
+It’s generally considered bad form to import using the asterisk notation.
+PEP 8, the Python Style Guide, specifically recommends against it. 
+'''
+
 public_func()
 
 try:
