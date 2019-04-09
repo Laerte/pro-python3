@@ -1,4 +1,3 @@
-# Get a 512 hex value from the beacon and display it
 from nistbeacon import NistBeacon
 
 record = NistBeacon.get_last_record()
