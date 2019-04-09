@@ -9,21 +9,18 @@ def get_arguments(func, args, kwargs):
     """
     Given a function and a set of arguments, return a dictionary
     of argument values that will be sent to the function.
-    We are modifying get_arguments by adding new parts to it.
     """
-    arguments = kwargs.copy()
+    arguments = {}
     spec = inspect.getfullargspec(func)
-    arguments.update(zip(spec.args, args))
 
     if spec.defaults:
-        for i, name in enumerate(spec.args[-len(spec.defaults):]):
-            if name not in arguments:
-                arguments[name] = spec.defaults[i]
+        arguments.update(zip(reversed(spec.args), reversed(spec.defaults)))
 
     if spec.kwonlydefaults:
-        for name, value in spec.kwonlydefaults.items():
-            if name not in arguments:
-                arguments[name] = value
+        arguments.update(spec.kwonlydefaults)
+
+    arguments.update(zip(spec.args, args))
+    arguments.update(kwargs)
 
     return arguments
 
