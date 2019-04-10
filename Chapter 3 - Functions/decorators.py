@@ -21,7 +21,11 @@ def suppress_errors(func=None, log_func=None):
         return decorator(func)
 
 
-@suppress_errors
+def print_logger(message):
+    print(message)
+
+
+@suppress_errors(log_func=print_logger)
 def sum_numbers(x, y):
     return x + y
 
