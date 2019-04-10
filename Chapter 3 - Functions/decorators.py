@@ -4,7 +4,7 @@ import functools
 def suppress_errors(func=None, log_func=None):
     """Automatically silence any errors that occur within a function"""
 
-    def decorator(func):  # removes the ability to call it without any arguments
+    def decorator(func):
         @functools.wraps(func)
         def wrapper(*args, **kwargs):
             try:
