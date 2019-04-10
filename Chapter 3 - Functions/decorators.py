@@ -1,20 +1,24 @@
 import functools
 
 
-def suppress_errors(func):
+def suppress_errors(log_func=None):
     """Automatically silence any errors that occur within a function"""
 
-    @functools.wraps(func)
-    def wrapper(*args, **kwargs):
-        try:
-            return func(*args, **kwargs)
-        except Exception:
-            pass
+    def decorator(func):  # removes the ability to call it without any arguments
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            try:
+                return func(*args, **kwargs)
+            except Exception as e:
+                if log_func is not None:
+                    log_func(str(e))
 
-    return wrapper
+        return wrapper
+
+    return decorator
 
 
-@suppress_errors
+@suppress_errors()  # have to use () syntax to call decorator, now that accepts args
 def sum_numbers(x, y):
     return x + y
 
