@@ -1,5 +1,7 @@
 # Method Resolution Order (MRO)
 # from left to right, in the order the classes were defined as base classes
+# Python uses an algorithm called C3
+
 
 class Book:
     def __init__(self, title):
