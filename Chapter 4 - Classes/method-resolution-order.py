@@ -86,5 +86,3 @@ class D(C, B):
 
 print(D().test())  # C
 
-
-
