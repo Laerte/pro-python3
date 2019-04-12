@@ -4,7 +4,7 @@ from collections import OrderedDict
 class OrderedMeta(type):
 
     @classmethod
-    def __prepare__(mcs, name, bases):
+    def __prepare__(cls, name, bases):
         return OrderedDict()
 
     def __init__(cls, name, bases, attrs):
