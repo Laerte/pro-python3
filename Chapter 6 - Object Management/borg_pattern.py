@@ -7,21 +7,34 @@ class Borg:
     def __new__(cls, *args, **kwargs):
         print('Borg')
         obj = super(Borg, cls).__new__(cls, *args, **kwargs)
-        obj.__dict__ = cls._namespace
+        obj.__dict__ = cls._namespace.setdefault(cls, {})
         return obj
 
-class Testing(Base, Borg):
+class TestOne(Borg):
+    pass
+
+class TestTwo(Borg):
     pass
 
 
-a = Testing()
-b = Testing()
+a = TestOne()
+b = TestOne()
+c = TestTwo()
 
-print(hasattr(a, 'attribute'))
+print(hasattr(a, 'spam'))
 
-b.attribute = 'value'
+b.spam = 'eggs'
 
-print(hasattr(a, 'attribute'))
-print(a.attribute)
+print(hasattr(a, 'spam'))
+print(a.spam)
 
 print(Borg._namespace)
+
+# print(c.spam)
+
+d = TestTwo()
+d.spam = 'burguer'
+
+print(c.spam)
+
+print(a.spam)
