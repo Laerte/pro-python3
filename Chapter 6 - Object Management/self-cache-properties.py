@@ -1,11 +1,23 @@
+import functools
+
+
+def cachedproperty(name):
+    def decorator(func):
+        @property
+        @functools.wraps(func)
+        def wrapper(self):
+            if name not in self.__dict__:
+                self.__dict__[name] = func(self)
+            return self.__dict__[name]
+        return wrapper
+    return decorator
+
+
 class Example:
-    @property
+    @cachedproperty('attr')
     def attr(self):
-        if 'attr' not in self.__dict__:
-            # Do the real work of retrieving the value
-            print('Getting value')
-            self.__dict__['attr'] = 42
-        return self.__dict__['attr']
+        print('Getting value')
+        return 42
 
 
 example = Example()
